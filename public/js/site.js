@@ -1,4 +1,7 @@
 
+document.querySelectorAll('.timeline-event').forEach((e,i)=>{e.style.gridColumn=(i+1)});
+const dl=document.createElement('dialog');dl.innerHTML='<img alt=""><p></p>';document.body.append(dl);dl.onclick=()=>dl.close();
+document.querySelectorAll('[data-photo]').forEach(a=>a.onclick=e=>{e.preventDefault();dl.querySelector('img').src=a.href;dl.querySelector('p').textContent=a.dataset.caption||'';dl.showModal()});
 const WA='https://wa.me/5519974052115';const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
 const km=n=>n.toLocaleString('pt-BR')+' km';
 const card=c=>`<a class="card" href="/carro?id=${c.id}"><div class="ph">${c.foto?`<img src="${c.foto}" alt="${c.nome}" loading="lazy">`:'Foto em breve'}</div><div class="i">${c.exemplo?'<span class="tag">Exemplo</span><br>':''}<h3>${c.nome}</h3><div class="f">${c.ano} · ${km(c.km)} · ${c.tipo}</div><div class="p">${brl(c.preco)}</div></div></a>`;

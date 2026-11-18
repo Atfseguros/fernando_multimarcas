@@ -1,4 +1,4 @@
-# Fernando Multimarcas: site (esqueleto fm1)
+# Fernando Multimarcas: site (esqueleto fm2)
 
 Site estático em `public/`. Publicação: Cloudflare Workers (assets), `wrangler.jsonc` na raiz.
 
