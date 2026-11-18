@@ -1,18 +1,26 @@
 
+const WA='https://wa.me/5519974052115';const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const km=n=>n.toLocaleString('pt-BR')+' km';const $=id=>document.getElementById(id);
+const go=t=>window.open(WA+'?text='+encodeURIComponent(t),'_blank','noopener');
 document.querySelectorAll('.timeline-event').forEach((e,i)=>{e.style.gridColumn=(i+1)});
 const dl=document.createElement('dialog');dl.innerHTML='<img alt=""><p></p>';document.body.append(dl);dl.onclick=()=>dl.close();
 document.querySelectorAll('[data-photo]').forEach(a=>a.onclick=e=>{e.preventDefault();dl.querySelector('img').src=a.href;dl.querySelector('p').textContent=a.dataset.caption||'';dl.showModal()});
-const WA='https://wa.me/5519974052115';const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
-const km=n=>n.toLocaleString('pt-BR')+' km';
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('.panel [data-p]').forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)});
+const bf=$('busca');if(bf)bf.onsubmit=e=>{e.preventDefault();const p=new URLSearchParams();[['q','hq'],['tipo','ht'],['max','hm'],['ano','ha']].forEach(([k,i])=>{if($(i).value)p.set(k,$(i).value)});location.href='/estoque'+(p.toString()?'?'+p:'')};
+let sv=[];try{sv=JSON.parse(localStorage.getItem('fm-buscas')||'[]')}catch(e){}
+const rs=()=>{const s=$('salvas');if(s)s.innerHTML=sv.map(t=>'<span>'+t.replace(/</g,'&lt;')+'</span>').join('')};rs();
+const al=$('alerta');if(al)al.onsubmit=e=>{e.preventDefault();const v=$('aq').value.trim();if(!v)return;sv=[v,...sv.filter(x=>x!==v)].slice(0,5);try{localStorage.setItem('fm-buscas',JSON.stringify(sv))}catch(e){}rs();go('Olá! Quero ser avisado quando chegar este carro: '+v)};
+const vl=$('valor');if(vl)vl.onsubmit=e=>{e.preventDefault();go('Olá! Quero avaliar meu carro para consignação. Modelo: '+$('vm').value+'. Ano: '+$('va').value+'. Km: '+$('vk').value+'.')};
 const card=c=>`<a class="card" href="/carro?id=${c.id}"><div class="ph">${c.foto?`<img src="${c.foto}" alt="${c.nome}" loading="lazy">`:'Foto em breve'}</div><div class="i">${c.exemplo?'<span class="tag">Exemplo</span><br>':''}<h3>${c.nome}</h3><div class="f">${c.ano} · ${km(c.km)} · ${c.tipo}</div><div class="p">${brl(c.preco)}</div></div></a>`;
 fetch('/estoque.json').then(r=>r.json()).then(all=>{
  const ativos=all.filter(c=>c.status!=='vendido');
- const d=document.getElementById('destaque');if(d)d.innerHTML=ativos.slice(0,3).map(card).join('');
- const l=document.getElementById('lista');
- if(l){const q=document.getElementById('q'),t=document.getElementById('tipo'),v=document.getElementById('vazio');
-  const draw=()=>{const s=q.value.toLowerCase(),r=ativos.filter(c=>c.nome.toLowerCase().includes(s)&&(!t.value||c.tipo===t.value));l.innerHTML=r.map(card).join('');v.hidden=r.length>0};
-  q.oninput=t.onchange=draw;draw()}
- const o=document.getElementById('carro');
+ const d=$('destaque');if(d)d.innerHTML=ativos.slice(0,3).map(card).join('');
+ const l=$('lista');
+ if(l){const U=new URLSearchParams(location.search),q=$('q'),t=$('et'),m=$('em'),a=$('ea'),v=$('vazio');
+  q.value=U.get('q')||'';t.value=U.get('tipo')||'';m.value=U.get('max')||'';a.value=U.get('ano')||'';
+  const draw=()=>{const w=q.value.toLowerCase().split(/\s+/).filter(Boolean);const r=ativos.filter(c=>{const h=(c.nome+' '+c.tipo+' '+c.ano+' '+(c.descricao||'')).toLowerCase();return w.every(x=>h.includes(x))&&(!t.value||c.tipo===t.value)&&(!m.value||c.preco<=+m.value)&&(!a.value||c.ano>=+a.value)});l.innerHTML=r.map(card).join('');v.hidden=r.length>0};
+  q.oninput=t.onchange=m.onchange=a.onchange=draw;draw()}
+ const o=$('carro');
  if(o){const c=all.find(x=>x.id===new URLSearchParams(location.search).get('id'));
   if(!c){o.innerHTML='<h1>Carro não encontrado</h1><p><a class="link" href="/estoque">Ver o estoque</a></p>';return}
   document.title=c.nome+' · Fernando Multimarcas';
