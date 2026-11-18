@@ -13,8 +13,8 @@ const al=$('alerta');if(al)al.onsubmit=e=>{e.preventDefault();const v=$('aq').va
 const vl=$('valor');if(vl)vl.onsubmit=e=>{e.preventDefault();go('Olá! Quero avaliar meu carro para consignação. Modelo: '+$('vm').value+'. Ano: '+$('va').value+'. Km: '+$('vk').value+'.')};
 const card=c=>`<a class="card" href="/carro?id=${c.id}"><div class="ph">${c.foto?`<img src="${c.foto}" alt="${c.nome}" loading="lazy">`:'Foto em breve'}</div><div class="i">${c.exemplo?'<span class="tag">Exemplo</span><br>':''}<h3>${c.nome}</h3><div class="f">${c.ano} · ${km(c.km)} · ${c.tipo}</div><div class="p">${brl(c.preco)}</div></div></a>`;
 fetch('/estoque.json').then(r=>r.json()).then(all=>{
- const ativos=all.filter(c=>c.status!=='vendido');
- const d=$('destaque');if(d)d.innerHTML=ativos.slice(0,3).map(card).join('');
+ const demo=location.search.includes('demo=1');const ativos=all.filter(c=>c.status!=='vendido'&&(!c.exemplo||demo));
+ const d=$('destaque');if(d){d.innerHTML=ativos.slice(0,3).map(card).join('');if(!ativos.length)d.closest('section').hidden=true}
  const l=$('lista');
  if(l){const U=new URLSearchParams(location.search),q=$('q'),t=$('et'),m=$('em'),a=$('ea'),v=$('vazio');
   q.value=U.get('q')||'';t.value=U.get('tipo')||'';m.value=U.get('max')||'';a.value=U.get('ano')||'';
