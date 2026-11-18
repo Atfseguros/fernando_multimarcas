@@ -1,0 +1,5 @@
+{
+ "name": "fernando-multimarcas-site",
+ "compatibility_date": "2026-11-17",
+ "assets": { "directory": "./public", "html_handling": "auto-trailing-slash" }
+}

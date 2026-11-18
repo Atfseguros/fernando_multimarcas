@@ -1,0 +1,38 @@
+[
+ {
+  "id": "exemplo-suv-2021",
+  "nome": "SUV exemplo",
+  "ano": 2021,
+  "km": 48000,
+  "preco": 129900,
+  "tipo": "SUV",
+  "status": "disponivel",
+  "foto": "",
+  "descricao": "Carro de exemplo para testar o layout.",
+  "exemplo": true
+ },
+ {
+  "id": "exemplo-sedan-2019",
+  "nome": "Sedã exemplo",
+  "ano": 2019,
+  "km": 62000,
+  "preco": 84900,
+  "tipo": "Sedã",
+  "status": "disponivel",
+  "foto": "",
+  "descricao": "Carro de exemplo para testar o layout.",
+  "exemplo": true
+ },
+ {
+  "id": "exemplo-antigo-1985",
+  "nome": "Antigo exemplo",
+  "ano": 1985,
+  "km": 91000,
+  "preco": 59900,
+  "tipo": "Antigo",
+  "status": "disponivel",
+  "foto": "",
+  "descricao": "Carro de exemplo para testar o layout.",
+  "exemplo": true
+ }
+]
