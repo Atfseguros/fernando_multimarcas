@@ -24,7 +24,13 @@ Azul-marinho #1d3855 · azul escuro #17324a · dourado #a6863e · dourado claro 
 "zero km" (nunca com a letra O) · "Venda seu carro" · "WhatsApp" · "ATF Seguros" · lema: "Fernando Multimarcas, tem!"
 
 ## Mini mapa do rodapé (padrão para os dois sites)
-Coluna "Onde estamos": mapa embutido de 150 px de altura (celular 180), borda dourado claro a 50%, carregamento preguiçoso, e link "Como chegar no Google Maps" logo abaixo. Variáveis: endereço do pino (EMBED), link curto (MAPS) e endereço escrito.
+Coluna "Onde estamos": caixa de 150 px de altura (celular 180) com o botão "Ver mapa"; o Google Maps só carrega após o clique (privacidade). Borda dourado claro a 50% e link "Como chegar no Google Maps" logo abaixo. Variáveis: endereço do pino (EMBED), link curto (MAPS) e endereço escrito.
 
 ## Faixa de registro do rodapé
 CNPJ à esquerda; à direita, "Corretora parceira · ATF Seguros · SUSEP 242155045" na FM, e "Registro SUSEP 242155045" na ATF.
+
+## Privacidade e cookies (padrão para os dois sites)
+- Página "Política de privacidade" com 8 seções (controlador, dados, mensagem, atendimento, cookies e hospedagem, serviços externos, direitos, atualizações) e âncora #cookies
+- Aviso fixo no canto inferior esquerdo: "Sua privacidade, com clareza." + botão "Entendi" (guarda só a dispensa no navegador); reabre pelo botão "Aviso de cookies" do rodapé
+- Sem cookies de publicidade, sem análise, sem fontes externas; mapa só após clique
+- Texto jurídico: revisar com advogado ou contador antes de publicar (razão social, retenção e encarregado)

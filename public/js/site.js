@@ -2,6 +2,11 @@
 const WA='https://wa.me/5519974052115';const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
 const km=n=>n.toLocaleString('pt-BR')+' km';const $=id=>document.getElementById(id);
 const go=t=>window.open(WA+'?text='+encodeURIComponent(t),'_blank','noopener');
+const cn=document.getElementById('cookie-notice');
+if(cn){try{if(localStorage.getItem('fm-aviso-v1')==='ok')cn.hidden=true}catch(e){}
+document.getElementById('cookie-close').onclick=()=>{cn.hidden=true;try{localStorage.setItem('fm-aviso-v1','ok')}catch(e){}};
+document.querySelectorAll('[data-cookie-open]').forEach(b=>b.onclick=()=>{cn.hidden=false;document.getElementById('cookie-close').focus()})}
+document.querySelectorAll('.mapa').forEach(m=>{const b=m.querySelector('button');if(b)b.onclick=()=>{const f=document.createElement('iframe');f.src=m.dataset.src;f.title='Mapa da Fernando Multimarcas';f.referrerPolicy='no-referrer-when-downgrade';m.replaceChildren(f)}});
 document.querySelectorAll('.timeline-event').forEach((e,i)=>{e.style.gridColumn=(i+1)});
 const dl=document.createElement('dialog');dl.innerHTML='<img alt=""><p></p>';document.body.append(dl);dl.onclick=()=>dl.close();
 document.querySelectorAll('[data-photo]').forEach(a=>a.onclick=e=>{e.preventDefault();dl.querySelector('img').src=a.href;dl.querySelector('p').textContent=a.dataset.caption||'';dl.showModal()});
